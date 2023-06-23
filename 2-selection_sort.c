@@ -69,26 +69,26 @@ void swap(int *a, int *b)
 
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j, min, flag;
+	size_t i, j, min;
+
+	if (!array || size < 2)
+		return;
 
 	for (i = 0; i < size; i++)
 	{
 		min = i;
-		flag = 0;
 		for (j = i + 1; j < size; j++)
 		{
 			if (array[j] < array[i])
 			{
 				min = j;
-				flag = 1;
 			}
 		}
-		swap(&array[min], &array[i]);
-		print_array(array, size);
-		if (flag == 0)
-			return;
-		/*swap(&array[min], &array[i]);*/
-		/*print_array(array, size);*/
+		if (array[min] != array[i] || min != i)
+		{
+			swap(&array[min], &array[i]);
+			print_array(array, size);
+		}
 
 	}
 }
