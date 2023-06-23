@@ -10,7 +10,7 @@ size_t smallest(int *array, size_t k, size_t size);
  * Return: The position of the smallest element
  */
 
-size_t smallest(int *array, size_t k, size_t size)
+/*size_t smallest(int *array, size_t k, size_t size)
 {
 	size_t pos = k, i;
 	int small = array[k];
@@ -24,7 +24,7 @@ size_t smallest(int *array, size_t k, size_t size)
 		}
 	}
 	return (pos);
-}
+}*/
 
 /**
  * selection_sort - implementation of selection sort
@@ -32,7 +32,7 @@ size_t smallest(int *array, size_t k, size_t size)
  * @size: size of array;
  * Return: void
  */
-
+/*
 void selection_sort(int *array, size_t size)
 {
 	size_t k, pos, temp;
@@ -44,5 +44,51 @@ void selection_sort(int *array, size_t size)
 		array[k] = array[pos];
 		array[pos] = temp;
 		print_array(array, size);
+	}
+}
+*/
+
+
+void swap(int *a, int *b);
+
+/**
+ * swap - swap to element in array
+ * @a: first element
+ * @b: second element;
+ * Return
+ */
+
+void swap(int *a, int *b)
+{
+	int temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void selection_sort(int *array, size_t size)
+{
+	size_t i, j, min, flag;
+
+	for (i = 0; i < size; i++)
+	{
+		min = i;
+		flag = 0;
+		for (j = i + 1; j < size; j++)
+		{
+			if (array[j] < array[i])
+			{
+				min = j;
+				flag = 1;
+			}
+		}
+		swap(&array[min], &array[i]);
+		print_array(array, size);
+		if (flag == 0)
+			return;
+		/*swap(&array[min], &array[i]);*/
+		/*print_array(array, size);*/
+
 	}
 }
