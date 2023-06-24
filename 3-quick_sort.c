@@ -20,7 +20,7 @@ void swap(int *array, int *a, int *b, size_t size)
 	*b = temp;
 	print_array(array, size);
 }
-int lomuto_partition(int arr[], int low, int high, size_t size);
+int lomuto_partition(int *arr, int low, int high, size_t size);
 
 /**
  * lomuto_partition - implemenattion of lumuto partition
@@ -31,27 +31,33 @@ int lomuto_partition(int arr[], int low, int high, size_t size);
  * Return: index of sorted element
  */
 
-int lomuto_partition(int arr[], int low, int high, size_t size)
+int lomuto_partition(int *arr, int low, int high, size_t size)
 {
 	int pivot, i, j, temp;
 
 	pivot = arr[high];
 
-	i = low - 1;
+	i = low;
 
 	for (j = low; j < high; j++)
 	{
 		if (arr[j] <= pivot)
 		{
+			if (i != j && arr[i] != arr[j])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+				print_array(arr, size);
+				/*swap(arr, &arr[i], &arr[j], size);*/
+			}
 			i++;
-			temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
 		}
 	}
-	swap(arr, &arr[i + 1], &arr[high], size);
+	if (high != low && arr[high] != arr[i])
+		swap(arr, &arr[i], &arr[high], size);
 
-	return (i + 1);
+	return (i);
 }
 void quicksort_recurssion(int *array, int low, int high, size_t size);
 
