@@ -1,21 +1,24 @@
 #include "sort.h"
 
-void swap(int *a, int *b);
+void swap(int *array, int *a, int *b, size_t size);
 
 /**
  * swap - swaps the position of element in an array
  * @a: element a
  * @b: element b
+ * @array: array of integer
+ * @size: size of integer
  * Return: void
  */
 
-void swap(int *a, int *b)
+void swap(int *array, int *a, int *b, size_t size)
 {
 	int temp;
 
 	temp = *a;
 	*a = *b;
 	*b = temp;
+	print_array(array, size);
 }
 int lomuto_partition(int arr[], int low, int high, size_t size);
 
@@ -30,24 +33,25 @@ int lomuto_partition(int arr[], int low, int high, size_t size);
 
 int lomuto_partition(int arr[], int low, int high, size_t size)
 {
-	int pivot, i, j;
+	int pivot, i, j, temp;
 
 	pivot = arr[high];
 
-	i = low;
+	i = low - 1;
 
 	for (j = low; j < high; j++)
 	{
 		if (arr[j] <= pivot)
 		{
-			swap(&arr[i], &arr[j]);
+			temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
 			i++;
 		}
 	}
-	swap(&arr[i], &arr[high]);
-	print_array(arr, size);
+	swap(arr, &arr[i + 1], &arr[high], size);
 
-	return (i);
+	return (i + 1);
 }
 void quicksort_recurssion(int *array, int low, int high, size_t size);
 
